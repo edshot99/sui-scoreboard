@@ -110,10 +110,17 @@ function PANEL:UpdatePlayerData()
 		return false
 	end
 
+	local buildStatus = "Unknown"
+	if self.Player:GetNWBool( "_Kyle_Buildmode" ) then
+		buildStatus = "Build"
+	else
+		buildStatus = "PvP"
+	end
+
 	self.lblName:SetText( self.Player:Nick() )
 	self.lblTeam:SetText( Scoreboard.getGroup( self.Player ) )
 
-	self.lblHours:SetText( Scoreboard.formatTime( Scoreboard.getPlayerTime( self.Player ) ))
+	self.lblHours:SetText( Scoreboard.formatTime( Scoreboard.getPlayerTime( self.Player ) ) .. " - " .. buildStatus )
 	self.lblHealth:SetText( self.Player:Health() )
 	self.lblFrags:SetText( self.Player:Frags() )
 	self.lblDeaths:SetText( self.Player:Deaths() )
